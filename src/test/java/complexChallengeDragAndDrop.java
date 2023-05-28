@@ -8,18 +8,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
-import java.util.Formatter;
 
 public class complexChallengeDragAndDrop {
 
     @Test
-    public void VerifyDragAndDropWorkingSuccessfully() throws InterruptedException {
+    public void VerifyDragAndDropWorkingSuccessfully() {
         WebDriver driver = WebDriverManager.chromedriver().create();
         driver.manage().window().maximize();
         driver.get("http://www.dhtmlgoodies.com/scripts/drag-drop-custom/demo-drag-drop-3.html");
 
         System.out.println("1. Verify draggable box color change when we put in correct country box");
-        System.out.println(String.format("|%-20s| %-20s| %-20s| %-20s|", "Capital", "Country", "hex color", "Correct/Incorrect?"));
+        System.out.printf("|%-20s| %-20s| %-20s| %-20s|%n", "Capital", "Country", "hex color", "Correct/Incorrect?");
         DragAndDrop(driver,"Stockholm","Sweden");
         DragAndDrop(driver,"Washington","United States");
         DragAndDrop(driver,"Oslo","Norway");
@@ -34,7 +33,7 @@ public class complexChallengeDragAndDrop {
         System.out.println("\n\n");
 
         System.out.println("2. Verify draggable box color not change when we put in incorrect country box");
-        System.out.println(String.format("|%-20s| %-20s| %-20s| %-20s|", "Capital", "Country", "hex color", "Correct/Incorrect?"));
+        System.out.printf("|%-20s| %-20s| %-20s| %-20s|%n", "Capital", "Country", "hex color", "Correct/Incorrect?");
         DragAndDrop(driver,"Stockholm","Italy");
         DragAndDrop(driver,"Washington","Spain");
         DragAndDrop(driver,"Oslo","United States");
@@ -49,7 +48,7 @@ public class complexChallengeDragAndDrop {
         System.out.println("\n\n");
 
         System.out.println("3. Verify correct + incorrect combinations");
-        System.out.println(String.format("|%-20s| %-20s| %-20s| %-20s|", "Capital", "Country", "hex color", "Correct/Incorrect?"));
+        System.out.printf("|%-20s| %-20s| %-20s| %-20s|%n", "Capital", "Country", "hex color", "Correct/Incorrect?");
         DragAndDrop(driver,"Stockholm","Sweden");
         DragAndDrop(driver,"Madrid","Spain");
         DragAndDrop(driver,"Copenhagen","South Korea");
@@ -57,10 +56,6 @@ public class complexChallengeDragAndDrop {
         DragAndDrop(driver,"Seoul","Italy");
         DragAndDrop(driver,"Oslo","Norway");
         DragAndDrop(driver,"Rome","Denmark");
-
-
-
-
     }
 
     public void DragAndDrop(WebDriver driver, String DragFrom,String DragTo){
@@ -83,8 +78,7 @@ public class complexChallengeDragAndDrop {
         var color = wait.until(ExpectedConditions.presenceOfElementLocated(draggableBoxAtDropZone)).getCssValue("background-color");
         String hexColor = Color.fromString(color).asHex();
         var passOrFail = hexColor.equals("#00ff00") ? "Correct" : "Incorrect";
-        System.out.println(String.format("|%-20s| %-20s| %-20s| %-20s|", DragFrom, DragTo, hexColor, passOrFail));
-
+        System.out.printf("|%-20s| %-20s| %-20s| %-20s|%n", DragFrom, DragTo, hexColor, passOrFail);
     }
 
     public void ResetDragAndDrop(WebDriver driver){
